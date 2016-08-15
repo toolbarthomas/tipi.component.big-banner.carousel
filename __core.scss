@@ -1,0 +1,100 @@
+@mixin core_big-banner-carousel {
+	.big-banner-images {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		> .big-banner-image {
+			display: none;
+
+			&:first-of-type {
+				display: block;
+			}
+
+			.__big-banner--carousel-ready & {
+				display: block;
+				opacity: 0;
+				visibility: hidden;
+				@include transition(
+					(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
+					(visibility $big-banner-transition-speed linear $big-banner-transition-speed)
+				);
+
+				&.__big-banner-image--active {
+					opacity: 1;
+					visibility: visible;
+					@include transition(
+						(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
+						(visibility $big-banner-transition-speed linear $big-banner-transition-timeout)
+					);
+				}
+			}
+
+			.__big-banner--carousel-ready & {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				&.big-banner-image--active {
+
+				}
+			}
+		}
+	}
+
+	.big-banner-slides {
+		position: relative;
+
+		.__big-banner--carousel-ready & {
+			@include transition(
+				(height $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout)
+			);
+		}
+
+		> .big-banner-slide {
+			display: none;
+
+			&:first-of-type {
+				display: block;
+			}
+
+			.__big-banner--carousel-ready & {
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				opacity: 0;
+				visibility: hidden;
+
+				@include transition(
+					(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
+					(visibility $big-banner-transition-speed linear $big-banner-transition-speed)
+				);
+
+				&.__big-banner-slide--active {
+					opacity: 1;
+					visibility: visible;
+
+					@include transition(
+						(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
+						(visibility $big-banner-transition-speed linear $big-banner-transition-timeout)
+					);
+				}
+			}
+		}
+	}
+
+	.big-banner-controls {
+		display: none;
+
+		.__big-banner--carousel-ready & {
+			display: block;
+		}
+	}
+}

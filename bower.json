@@ -1,0 +1,20 @@
+{
+  "name": "tipi.component.big-banner.carousel",
+  "homepage": "https://github.com/toolbarthomas/tipi.component.big-banner.carousel",
+  "authors": [
+    "Thomas van der Velde <contact@toolbarthomas.net>"
+  ],
+  "description": "Carousel extension for Big Banner Carousel Tipi component",
+  "keywords": [
+    "toolbarthomas",
+    "modular",
+    "tipi",
+    "carousel",
+    "big-banner"
+  ],
+  "license": "MIT",
+  "main": "_tipi.component.big-banner.carousel.scss",
+  "dependencies" : {
+    "tipi.component.big-banner.carousel": "^3.0.0"
+  }
+}

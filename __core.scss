@@ -1,5 +1,5 @@
 @mixin core_big-banner-carousel {
-	.big-banner-cover-images {
+	.big-banner-images {
 		display: block;
 		position: absolute;
 		top: 0;
@@ -7,7 +7,7 @@
 		bottom: 0;
 		left: 0;
 
-		> .big-banner-cover-image {
+		> .big-banner-image {
 			display: none;
 
 			&:first-of-type {
@@ -23,7 +23,7 @@
 					(visibility $big-banner-transition-speed linear $big-banner-transition-speed)
 				);
 
-				&.__big-banner-cover-image--active {
+				&.__big-banner-image--active {
 					opacity: 1;
 					visibility: visible;
 					@include transition(

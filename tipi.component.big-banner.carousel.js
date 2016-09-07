@@ -1,8 +1,8 @@
 function setBigBannerCarousel() {
 	var bigBannerCarouselElements = {
 		root : 'big-banner--carousel',
-		images : 'big-banner-cover-images',
-		image : 'big-banner-cover-image',
+		images : 'big-banner-images',
+		image : 'big-banner-image',
 		slides : 'big-banner-slides',
 		slide : 'big-banner-slide',
 		next : 'big-banner-next',

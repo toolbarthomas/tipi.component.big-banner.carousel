@@ -1,8 +1,8 @@
 function setBigBannerCarousel() {
 	var bigBannerCarouselElements = {
 		root : 'big-banner--carousel',
-		images : 'big-banner-images',
-		image : 'big-banner-image',
+		images : 'big-banner-cover-images',
+		image : 'big-banner-cover-image',
 		slides : 'big-banner-slides',
 		slide : 'big-banner-slide',
 		next : 'big-banner-next',
@@ -48,33 +48,33 @@ function setBigBannerCarousel() {
 		})
 
 		bigBannerCarousel.each(function() {
-			var bigBannerCarousel = $(this);
-			var next = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'next');
-			var prev = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'prev');
-			var toggles = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'toggles');
+			var bigBannerCarouselEach = $(this);
+			var next = getBigBannerCarouselElement(bigBannerCarouselEach, bigBannerCarouselElements, 'next');
+			var prev = getBigBannerCarouselElement(bigBannerCarouselEach, bigBannerCarouselElements, 'prev');
+			var toggles = getBigBannerCarouselElement(bigBannerCarouselEach, bigBannerCarouselElements, 'toggles');
 
-			if(getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'image').length == getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'slide').length) {
+			if(getBigBannerCarouselElement(bigBannerCarouselEach, bigBannerCarouselElements, 'image').length == getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'slide').length) {
 				var bigBannerCarouselOptions = {
 					autoplay : 0,
 					startFrom : 0
 				}
 
 				//Check if the current bigBannerCarousel has an autoplay option
-				if(typeof bigBannerCarousel.data(bigBannerCarouselDataAttributes.autoplay) !== 'undefined' ) {
-					if(parseInt(bigBannerCarousel.autoplay(bigBannerCarouselDataAttributes.startFrom)) != 'NaN') {
-						bigBannerCarousel.autoplay = bigBannerCarousel.data(bigBannerCarouselDataAttributes.autoplay);
+				if(typeof bigBannerCarouselEach.data(bigBannerCarouselDataAttributes.autoplay) !== 'undefined' ) {
+					if(parseInt(bigBannerCarouselEach.autoplay(bigBannerCarouselDataAttributes.startFrom)) != 'NaN') {
+						bigBannerCarouselEach.autoplay = bigBannerCarouselEach.data(bigBannerCarouselDataAttributes.autoplay);
 					}
 				}
 
-				if(typeof bigBannerCarousel.data(bigBannerCarouselDataAttributes.startFrom) !== 'undefined' ) {
-					if(parseInt(bigBannerCarousel.data(bigBannerCarouselDataAttributes.startFrom)) != 'NaN') {
-						bigBannerCarousel.startFrom = parseInt(bigBannerCarousel.data(bigBannerCarouselDataAttributes.startFrom));
+				if(typeof bigBannerCarouselEach.data(bigBannerCarouselDataAttributes.startFrom) !== 'undefined' ) {
+					if(parseInt(bigBannerCarouselEach.data(bigBannerCarouselDataAttributes.startFrom)) != 'NaN') {
+						bigBannerCarouselEach.startFrom = parseInt(bigBannerCarouselEach.data(bigBannerCarouselDataAttributes.startFrom));
 					}
 				}
 
-				bigBannerCarousel.addClass(bigBannerCarouselStates.ready);
-				bigBannerCarousel.trigger('tipi.bigBannerCarousel.switch', [bigBannerCarousel, bigBannerCarouselOptions.startFrom]);
-				bigBannerCarousel.trigger('tipi.bigBannerCarousel.resize', [bigBannerCarousel]);
+				bigBannerCarouselEach.addClass(bigBannerCarouselStates.ready);
+				bigBannerCarouselEach.trigger('tipi.bigBannerCarousel.switch', [bigBannerCarouselEach, bigBannerCarouselOptions.startFrom]);
+				bigBannerCarouselEach.trigger('tipi.bigBannerCarousel.resize', [bigBannerCarouselEach]);
 
 				//@TODO autoplay function
 				// if(bigBannerCarouselOptions.autoplay > 0) {
@@ -115,7 +115,8 @@ function setBigBannerCarousel() {
 
 				if(toggles.length > 0) {
 					toggles.each(function() {
-						setBigBannerCarouselToggle(toggles, bigBannerCarouselElements, bigBannerCarouselDataAttributes);
+						var togglesEach = $(this);
+						setBigBannerCarouselToggle(togglesEach, bigBannerCarouselElements, bigBannerCarouselDataAttributes);
 					});
 				}
 			}
@@ -210,11 +211,26 @@ function switchBigBannerCarouselToggle(bigBannerCarousel, bigBannerCarouselEleme
 
 function resizeBigBannerCarouselslides(bigBannerCarousel, bigBannerCarouselElements, bigBannerCarouselStates) {
 	var slides = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'slides');
-	var slide = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'slide').filter('.' + bigBannerCarouselStates.slideActive);
+	var slide = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'slide');
 
 	if(slide.length > 0) {
-		slides .css({
-			'height' : slide.outerHeight()
+		var slideHeight = [];
+		var slidesHeight = slides.parent().outerHeight();
+
+		slide.each(function() {
+			slideHeight.push($(this).outerHeight());
+		});
+
+		slideHeight.sort(function(a, b) {
+			return b - a;
+		});
+
+		if(slideHeight[0] >= slidesHeight) {
+			slidesHeight = slideHeight[0];
+		}
+
+		slides.css({
+			'height' : slidesHeight
 		});
 	}
 }

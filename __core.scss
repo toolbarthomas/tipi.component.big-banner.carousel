@@ -1,5 +1,5 @@
 @mixin core_big-banner-carousel {
-	.big-banner-images {
+	.big-banner-cover-images {
 		display: block;
 		position: absolute;
 		top: 0;
@@ -7,7 +7,7 @@
 		bottom: 0;
 		left: 0;
 
-		> .big-banner-image {
+		> .big-banner-cover-image {
 			display: none;
 
 			&:first-of-type {
@@ -23,7 +23,7 @@
 					(visibility $big-banner-transition-speed linear $big-banner-transition-speed)
 				);
 
-				&.__big-banner-image--active {
+				&.__big-banner-cover-image--active {
 					opacity: 1;
 					visibility: visible;
 					@include transition(
@@ -39,18 +39,19 @@
 				left: 0;
 				right: 0;
 				bottom: 0;
-
-				&.big-banner-image--active {
-
-				}
 			}
 		}
 	}
 
 	.big-banner-slides {
+		display: table;
 		position: relative;
+		width: 100%;
+		height: 100%;
 
 		.__big-banner--carousel-ready & {
+			display: block;
+
 			@include transition(
 				(height $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout)
 			);
@@ -58,17 +59,20 @@
 
 		> .big-banner-slide {
 			display: none;
+			width: 100%;
+			height: 100%;
 
 			&:first-of-type {
-				display: block;
+				display: table;
 			}
 
 			.__big-banner--carousel-ready & {
-				display: block;
+				display: table;
 				position: absolute;
 				top: 0;
 				left: 0;
 				width: 100%;
+				height: 100%;
 				opacity: 0;
 				visibility: hidden;
 

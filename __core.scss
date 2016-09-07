@@ -75,6 +75,9 @@
 				height: 100%;
 				opacity: 0;
 				visibility: hidden;
+				@if $big-banner-slide-vertical-align != false {
+					vertical-align: $big-banner-slide-vertical-align;
+				}
 
 				@if $big-banner-slide-transition != false {
 					@include transition(
@@ -112,6 +115,9 @@
 		display: table;
 		height: 100%;
 		width: 100%;
+		@if $big-banner-slide-vertical-align != false {
+			vertical-align: $big-banner-slide-vertical-align;
+		}
 	}
 
 	.big-banner-slide-align-body {

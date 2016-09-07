@@ -214,6 +214,10 @@ function resizeBigBannerCarouselslides(bigBannerCarousel, bigBannerCarouselEleme
 	var slide = getBigBannerCarouselElement(bigBannerCarousel, bigBannerCarouselElements, 'slide');
 
 	if(slide.length > 0) {
+		slides.css({
+			'height' : 'auto'
+		});
+
 		var slideHeight = [];
 		var slidesHeight = slides.parent().outerHeight();
 

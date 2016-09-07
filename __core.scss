@@ -18,18 +18,24 @@
 				display: block;
 				opacity: 0;
 				visibility: hidden;
-				@include transition(
-					(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
-					(visibility $big-banner-transition-speed linear $big-banner-transition-speed)
-				);
+
+				@if $big-banner-slide-transition != false {
+					@include transition(
+						(opacity $big-banner-slide-transition-speed $big-banner-slide-transition-timing $big-banner-slide-transition-delay),
+						(visibility $big-banner-slide-transition-speed linear ( $big-banner-slide-transition-delay + $big-banner-slide-transition-speed ))
+					);
+				}
 
 				&.__big-banner-image--active {
 					opacity: 1;
 					visibility: visible;
-					@include transition(
-						(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
-						(visibility $big-banner-transition-speed linear $big-banner-transition-timeout)
-					);
+
+					@if $big-banner-slide-transition != false {
+						@include transition(
+							(opacity $big-banner-slide-transition-speed $big-banner-slide-transition-timing $big-banner-slide-transition-delay),
+							(visibility $big-banner-slide-transition-speed linear $big-banner-slide-transition-delay)
+						);
+					}
 				}
 			}
 
@@ -52,20 +58,14 @@
 		.__big-banner--carousel-ready & {
 			display: block;
 
-			@include transition(
-				(height $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout)
-			);
+			@if $big-banner-slide-transition != false {
+				@include transition(
+					(height $big-banner-slide-transition-speed $big-banner-slide-transition-timing $big-banner-slide-transition-delay)
+				);
+			}
 		}
 
 		> .big-banner-slide {
-			display: none;
-			width: 100%;
-			height: 100%;
-
-			&:first-of-type {
-				display: table;
-			}
-
 			.__big-banner--carousel-ready & {
 				display: table;
 				position: absolute;
@@ -76,21 +76,50 @@
 				opacity: 0;
 				visibility: hidden;
 
-				@include transition(
-					(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
-					(visibility $big-banner-transition-speed linear $big-banner-transition-speed)
-				);
+				@if $big-banner-slide-transition != false {
+					@include transition(
+						(opacity $big-banner-slide-transition-speed $big-banner-slide-transition-timing $big-banner-slide-transition-delay),
+						(visibility $big-banner-slide-transition-speed linear ($big-banner-slide-transition-delay + $big-banner-slide-transition-speed ))
+					);
+				}
 
 				&.__big-banner-slide--active {
 					opacity: 1;
 					visibility: visible;
 
-					@include transition(
-						(opacity $big-banner-transition-speed $big-banner-transition-timing $big-banner-transition-timeout),
-						(visibility $big-banner-transition-speed linear $big-banner-transition-timeout)
-					);
+					@if $big-banner-slide-transition != false {
+						@include transition(
+							(opacity $big-banner-slide-transition-speed $big-banner-slide-transition-timing $big-banner-slide-transition-delay),
+							(visibility $big-banner-slide-transition-speed linear ($big-banner-slide-transition-delay + $big-banner-slide-transition-delay ))
+						);
+					}
 				}
 			}
+		}
+	}
+
+	.big-banner-slide {
+		display: none;
+		width: 100%;
+		height: 100%;
+
+		&:first-of-type {
+			display: table;
+		}
+	}
+
+	.big-banner-slide-align {
+		display: table;
+		height: 100%;
+		width: 100%;
+	}
+
+	.big-banner-slide-align-body {
+		display: table-cell;
+		width: 100%;
+		height: 0;
+		@if $big-banner-slide-vertical-align != false {
+			vertical-align: $big-banner-slide-vertical-align;
 		}
 	}
 

@@ -1,3 +1,5 @@
-$big-banner-transition-speed: 	250ms;
-$big-banner-transition-timing: 	ease-in-out;
-$big-banner-transition-timeout: 0s;
+$big-banner-slide-transition: 			true !default;
+$big-banner-slide-transition-speed: 	250ms !default;
+$big-banner-slide-transition-timing: 	ease-in-out !default;
+$big-banner-slide-transition-delay: 	0s !default;
+$big-banner-slide-vertical-align: 		middle !default;

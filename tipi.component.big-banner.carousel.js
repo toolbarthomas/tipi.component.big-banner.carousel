@@ -219,7 +219,6 @@ function resizeBigBannerCarouselslides(bigBannerCarousel, bigBannerCarouselEleme
 		});
 
 		var slideHeight = [];
-		var slidesHeight = slides.parent().outerHeight();
 
 		slide.each(function() {
 			slideHeight.push($(this).outerHeight());
@@ -229,12 +228,8 @@ function resizeBigBannerCarouselslides(bigBannerCarousel, bigBannerCarouselEleme
 			return b - a;
 		});
 
-		if(slideHeight[0] >= slidesHeight) {
-			slidesHeight = slideHeight[0];
-		}
-
 		slides.css({
-			'height' : slidesHeight
+			'height' : slideHeight[0]
 		});
 	}
 }

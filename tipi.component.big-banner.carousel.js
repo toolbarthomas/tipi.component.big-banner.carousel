@@ -37,12 +37,17 @@ function setBigBannerCarousel() {
 			}
 		});
 
+
+		var windowWidth = $(window).width();
 		var resize;
 		$(window).on({
 			resize : function() {
 				clearTimeout(resize);
 				resize = setTimeout(function() {
-					bigBannerCarousel.trigger('tipi.bigBannerCarousel.resize', [bigBannerCarousel]);
+					if(windowWidth != $(window).width()) {
+						bigBannerCarousel.trigger('tipi.bigBannerCarousel.resize', [bigBannerCarousel]);
+					}
+					windowWidth = $(window).width();
 				}, 100);
 			}
 		})
